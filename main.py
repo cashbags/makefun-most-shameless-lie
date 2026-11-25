@@ -9,12 +9,18 @@ byte-identical on every run. No network, no input, no randomness.
 import os
 
 LIE = "The deploy was intentional."
+OUTPUT_PATH = "/output/entry.txt"
+
+
+def write_entry(text):
+    """Write text exactly, creating the output directory if needed."""
+    os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
+    with open(OUTPUT_PATH, "w", encoding="utf-8", newline="") as f:
+        f.write(text)
 
 
 def main():
-    os.makedirs("/output", exist_ok=True)
-    with open("/output/entry.txt", "w", encoding="utf-8", newline="") as f:
-        f.write(LIE)
+    write_entry(LIE)
 
 
 if __name__ == "__main__":
